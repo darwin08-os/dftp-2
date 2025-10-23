@@ -1,0 +1,92 @@
+#libs
+import subprocess
+import os
+import traceback
+from tqdm import tqdm
+
+def filterCommand(command):
+        if command == "ls":
+                return "dir"
+        else: 
+                if command == "pwd":
+                        return "cd"
+        if command == "cd":
+                return "cd"
+        if command.startswith("cd") and len(command)>2:
+                os.chdir(command[3:].strip())
+                return "cd"
+        
+
+def ExecuteCommand(command):
+        command_to_run = filterCommand(command)
+        
+        run = subprocess.Popen(command_to_run,shell=True\
+,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        output = run.stdout.read() + run.stderr.read()
+
+        return output
+
+
+def SendData(c,filepath,data):
+        try:
+                if "/" not in filepath and \
+"\\" not in filepath:
+                        filepath = os.path.join(\
+os.getcwd(),os.path.basename(filepath.strip()))
+                        #print(filepath)
+
+                #file size and name
+                filename = filepath.replace("\\","/")\
+.split("/")[-1]
+
+                filesize = str(os.path.getsize(filepath))
+
+                #send filename and filesize
+                header = f"{filename}|{filesize}"
+                c.sendall(header.encode())
+                #c.sendall(filename.encode())
+                #c.sendall(filesize.encode())
+                filesize = int(filesize)
+                with open(filepath,"rb") as f :
+                        pbar = tqdm(total=max(filesize,4096),\
+unit='B',unit_scale=True,desc="Uploading the file")
+                        while True:
+                                content = f.read(4096)
+                                if not content:
+                                        break
+                                data.sendall(content)
+                                pbar.update(len(content))
+                        pbar.close()
+                return "Done from our/theirSide"
+
+        except Exception as e:
+                return e
+
+cwd = os.getcwd()
+def ReciveData(c,reciever):
+        try:
+                header = c.recv(1024).decode()
+                filename = header.split("|")[0]
+                filesize = int(header.split("|")[1])
+                print(filename)
+                print(filesize)
+                remain = filesize
+                with open(filename,"wb") as f :
+                        pbar = tqdm(total=max(filesize,4096),\
+unit='B',unit_scale=True,desc="Uploading the file")
+                        while remain > 0:
+                                if filesize >= 4096:
+                                        chunk = 4096
+                                else:
+                                        chunk = remain
+                                content = reciever.recv(chunk)
+                                if not content:
+                                        break
+                                f.write(content)
+                                remain = remain - len(content)
+                                pbar.update(len(content))
+                        pbar.close()
+                return "recieved"
+        except Exception as e :
+                print(traceback.format_exc())
+                return e
