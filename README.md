@@ -10,9 +10,14 @@ ftp server client made in python using socket prograaming after some time and te
 
 
 ## USAGE:
--0. frst install require module in requirement.txt using command "pip install -r requirement.txt" and you must have python in your pc 
-commands = [ls,pwd,cd,send filepath+name ,get filepath+name]
--1.server has no control means from server you cant run any commands 
-2. client can run commands in their own system using "!" ,example if you want to see client's current dir then write "!ls"
-3.for server side navigation you can use commands normally
+- first  "pip install -r requirement.txt"
+
+- commands = [ls,pwd,cd,send filepath+name ,get filepath+name]
+
+  
+- server has no control means from server you cant run any commands
+   
+- client commands starts with "!" ,example if you want to see client's current dir then write "!ls"
+  
+- server side navigation and commands : you can use commands normally
 
