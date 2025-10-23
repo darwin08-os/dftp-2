@@ -1,5 +1,16 @@
-# dftp-2
-ftp server client made in python using socket prograaming after some time and testing i will write how you can use this properly like what commands are valid or not and all and this is totally CLI based ftp, "d" there because it is made by darwin means ME.. : )
+# Python CLI FTP
+A Command-Line Interface (CLI) FTP server and client built in Python using socket programming.
+
+> “d” stands for Darwin, the creator of this project. 🙂
+
+## Features
+Transfer files between client and server.
+
+Execute OS commands on the client or server (where allowed).
+
+Fully CLI-based, lightweight, and simple to use.
+
+Handles large files efficiently with chunked transfers.
 
 ## Setup
 - In `client.py`, update the `HOST` variable to your server's IP address before running.
@@ -21,3 +32,8 @@ ftp server client made in python using socket prograaming after some time and te
   
 - server side navigation and commands : you can use commands normally
 
+- starts server first then connect the client
+
+## License
+
+- MIT License — free to use with credit to the creator.
