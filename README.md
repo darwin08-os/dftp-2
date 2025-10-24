@@ -21,14 +21,14 @@ Handles large files efficiently with chunked transfers.
 
 
 ## USAGE:
-- first  "pip install -r requirement.txt"
+- first  `pip install -r requirement.txt`
 
-- commands = [ls,pwd,cd,send filepath+name ,get filepath+name]
+- `commands = [ls,pwd,cd,send filepath/filename ,get filepath/filename]`
 
   
 - server has no control means from server you cant run any commands
    
-- client commands starts with "!" ,example if you want to see client's current dir then write "!ls"
+- client commands starts with `!` ,example if you want to see client's current dir then write `!ls`
   
 - server side navigation and commands : you can use commands normally
 
