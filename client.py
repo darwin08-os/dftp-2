@@ -15,9 +15,13 @@ SOCK_STREAM)
 data = socket.socket(socket.AF_INET,socket.\
 SOCK_STREAM)
 
+print("trying to connect to :",host)
+
 #connect
 client.connect((host,port))
 data.connect((host,41001))
+
+print("connected")
 while True:
 	try:
 		command = input(f"{os.getcwd()}>")
@@ -64,4 +68,5 @@ or command in ("ls","pwd")) :
 		break
 	except Exception as e:
 		print("error :",e)
+
 
