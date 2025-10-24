@@ -1,7 +1,6 @@
 #important libraris
 import helper
 import socket
-import sys
 
 #variables
 host = "0.0.0.0"
