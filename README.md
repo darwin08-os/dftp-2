@@ -16,7 +16,7 @@ Handles large files efficiently with chunked transfers.
 - In `client.py`, update the `HOST` variable to your server's IP address before running.
 
 ## Known Issues
-- If the client closes unexpectedly, the server may show a connection error. 
+- If the client close the program unexpectedly, the server may show a connection error. 
   (Will be fixed in future updates.)
 
 
@@ -32,7 +32,10 @@ Handles large files efficiently with chunked transfers.
   
 - server side navigation and commands : you can use commands normally
 
-- starts server first then connect the client
+- Starts server first then connect the client
+
+- Termination of the connection will be from client side : just press `ctrl+c`
+
 
 ## License
 
