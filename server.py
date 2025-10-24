@@ -4,8 +4,7 @@ import socket
 import sys
 
 #variables
-host = socket.gethostbyname(socket.gethostname())
-#host = "127.0.0.1"
+host = "0.0.0.0"
 port = 41000
 
 #socket
@@ -73,5 +72,6 @@ while conn:
 	finally:
 		server.close()
 		
+
 
 
