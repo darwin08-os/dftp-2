@@ -4,9 +4,10 @@ import socket
 import os
 
 #vars
-host = "127.0.0.1"
+host = "10.177.108.244"
 port = 41000
 
+print("trying to connect to : ",host)
 
 #socket
 client = socket.socket(socket.AF_INET,socket.\
@@ -21,7 +22,8 @@ print("trying to connect to :",host)
 client.connect((host,port))
 data.connect((host,41001))
 
-print("connected")
+
+print("connected successfully")
 while True:
 	try:
 		command = input(f"{os.getcwd()}>")
