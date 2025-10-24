@@ -20,9 +20,9 @@ data_socket.bind((host,41001))
 
 #start listening
 server.listen(10)
-print("server ip : ",host)
+print("listening on : ",host)
 print("started listening..")
-data_socket.listen(1)
+data_socket.listen(10)
 #recive connection
 conn,addr = server.accept()
 data_socket_conn,addr = data_socket.accept()
@@ -72,6 +72,7 @@ while conn:
 	finally:
 		server.close()
 		
+
 
 
 
