@@ -4,7 +4,7 @@ import socket
 import os
 
 #vars
-host = "10.177.108.244"
+host = input("server ip : ")
 port = 41000
 
 print("trying to connect to : ",host)
