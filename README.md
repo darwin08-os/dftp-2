@@ -4,13 +4,15 @@ A Command-Line Interface (CLI) FTP server and client built in Python using socke
 > “d” stands for Darwin, the creator of this project. 🙂
 
 ## Features
-Transfer files between client and server.
+- Transfer files between client and server.
 
-Execute OS commands on the client or server (where allowed).
+- Execute OS commands on the client or server (where allowed).
 
-Fully CLI-based, lightweight, and simple to use.
+- Fully CLI-based, lightweight, and simple to use.
 
-Handles large files efficiently with chunked transfers.
+- Handles large files efficiently with chunked transfers.
+
+- simultanious connections are accepted on server
 
 ## Setup
 - In `client.py`, update the `HOST` variable to your server's IP address before running.
