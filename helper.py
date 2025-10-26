@@ -89,4 +89,48 @@ unit='B',unit_scale=True,desc="Uploading the file")
                 return "recieved"
         except Exception as e :
                 print(traceback.format_exc())
-                return e
+                return e		
+
+def handle_client(server,conn,data_socket_conn,running):
+        while running:
+                try:
+                        data = conn.recv(1024).decode()
+                        if not data :
+                                break
+                        command = str(data)
+                        if command.startswith("cd") or command in ('ls', 'pwd'):
+                                try:
+                                        output = ExecuteCommand(command)	
+                                        print(output)
+                                except Exception as e:
+                                        output = f"ERROR: {e}"
+
+                                # Convert output to bytes for reliable sending
+                                output_bytes = output.encode(errors="replace")
+                                size = len(output_bytes)
+
+                                # First, send the size of output
+                                conn.send(str(f"check|{size}").encode())
+
+                                # Send the output in chunks
+                                chunk_size = 4096  # 4 KB per chunk
+                                sent = 0
+                                while sent < size:
+                                        end = min(sent + chunk_size, size)
+                                        data_socket_conn.send(output_bytes[sent:end])
+                                        sent = end
+
+                                                
+                        if command[0:4].lower() == 'send':
+                                conn.send("READY".encode())
+                                output = ReciveData(conn,data_socket_conn)
+                                print(output)
+                        if command[0:3] == 'get':
+                                conn.send("send".encode())
+                                if conn.recv(1024).decode() == "READY":
+                                        output = SendData(conn,command[4:],data_socket_conn)
+                                        print(output)
+                except Exception as e :
+                        print(e)
+                        conn.close()
+                        data_socket_conn.close()
