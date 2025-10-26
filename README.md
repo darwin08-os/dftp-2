@@ -26,7 +26,7 @@ Handles large files efficiently with chunked transfers.
 - `commands = [ls,pwd,cd,send filepath/filename ,get filepath/filename]`
 
   
-- server has no control means from server you cant run any commands
+- server has no control means , you can not do anything using server except for closing it using `q` then press `enter`
    
 - client commands starts with `!` ,example if you want to see client's current dir then write `!ls`
   
