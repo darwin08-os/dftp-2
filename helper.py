@@ -24,12 +24,13 @@ def ExecuteCommand(command):
                 for num,i in enumerate(os.listdir()):
                         file = str(num)+" "+i
                         dirs.append(file)
-                return dirs        
-        run = subprocess.Popen(command_to_run,shell=True\
-,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
-        output = run.stdout.read() + run.stderr.read()
+                return dirs 
+        else:       
+                run = subprocess.Popen(command_to_run,shell=True\
+        ,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+                output = run.stdout.read() + run.stderr.read()
 
-        return output
+                return output
 
 
 def SendData(c,filepath,data):
@@ -107,14 +108,17 @@ def handle_client(server,conn,data_socket_conn,running):
                                 try:
                                         output = ExecuteCommand(command)
                                         if type(output) == list:
+                                                output = ""
                                                 for i in output:
-                                                        print(output)
+                                                        print(i)
+                                                        output = output+"i"+"\n"
                                         else:	
                                                 print(output)
                                 except Exception as e:
                                         output = f"ERROR: {e}"
 
                                 # Convert output to bytes for reliable sending
+                                output = str(output)
                                 output_bytes = output.encode(errors="replace")
                                 size = len(output_bytes)
 
