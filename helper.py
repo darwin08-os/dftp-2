@@ -19,7 +19,12 @@ def filterCommand(command):
 
 def ExecuteCommand(command):
         command_to_run = filterCommand(command)
-        
+        dirs = []
+        if command_to_run == "dir":
+                for num,i in enumerate(os.listdir()):
+                        file = str(num)+" "+i
+                        dirs.append(file)
+                return dirs        
         run = subprocess.Popen(command_to_run,shell=True\
 ,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
         output = run.stdout.read() + run.stderr.read()
@@ -100,8 +105,12 @@ def handle_client(server,conn,data_socket_conn,running):
                         command = str(data)
                         if command.startswith("cd") or command in ('ls', 'pwd'):
                                 try:
-                                        output = ExecuteCommand(command)	
-                                        print(output)
+                                        output = ExecuteCommand(command)
+                                        if type(output) == list:
+                                                for i in output:
+                                                        print(output)
+                                        else:	
+                                                print(output)
                                 except Exception as e:
                                         output = f"ERROR: {e}"
 
