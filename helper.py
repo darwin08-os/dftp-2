@@ -111,7 +111,7 @@ def handle_client(server,conn,data_socket_conn,running):
                                                 output_list = ""
                                                 for i in output:
                                                         print(i)
-                                                        output_list = output_list+"i"+"\n"
+                                                        output_list = output_list+i+"\n"
                                         else:	
                                                 print(output)
                                 except Exception as e:
