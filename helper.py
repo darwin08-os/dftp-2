@@ -4,6 +4,7 @@ import os
 import traceback
 from tqdm import tqdm
 
+
 def filterCommand(command):
         if command == "ls":
                 return "dir"
@@ -35,15 +36,17 @@ def ExecuteCommand(command):
 
 def SendData(c,filepath,data):
         try:
-                if "/" not in filepath and \
-"\\" not in filepath:
-                        filepath = os.path.join(\
-os.getcwd(),os.path.basename(filepath.strip()))
+                if filepath.isnumeric():
+                        index = int(filepath)
+                        dir_list = os.listdir()
+                        filepath = os.path.join(os.getcwd(),os.path.basename(dir_list[index].strip()))
+
+                elif "/" not in filepath and "\\" not in filepath:
+                        filepath = os.path.join(os.getcwd(),os.path.basename(filepath.strip()))
                         #print(filepath)
 
                 #file size and name
-                filename = filepath.replace("\\","/")\
-.split("/")[-1]
+                filename = filepath.replace("\\","/").split("/")[-1]
 
                 filesize = str(os.path.getsize(filepath))
 
@@ -112,13 +115,14 @@ def handle_client(server,conn,data_socket_conn,running):
                                                 for i in output:
                                                         print(i)
                                                         output_list = output_list+i+"\n"
+                                                output = str(output_list)
                                         else:	
                                                 print(output)
                                 except Exception as e:
                                         output = f"ERROR: {e}"
 
                                 # Convert output to bytes for reliable sending
-                                output = str(output_list)
+                                
                                 output_bytes = output.encode(errors="replace")
                                 size = len(output_bytes)
 
