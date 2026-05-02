@@ -108,17 +108,17 @@ def handle_client(server,conn,data_socket_conn,running):
                                 try:
                                         output = ExecuteCommand(command)
                                         if type(output) == list:
-                                                output = ""
+                                                output_list = ""
                                                 for i in output:
                                                         print(i)
-                                                        output = output+"i"+"\n"
+                                                        output_list = output_list+"i"+"\n"
                                         else:	
                                                 print(output)
                                 except Exception as e:
                                         output = f"ERROR: {e}"
 
                                 # Convert output to bytes for reliable sending
-                                output = str(output)
+                                output = str(output_list)
                                 output_bytes = output.encode(errors="replace")
                                 size = len(output_bytes)
 
